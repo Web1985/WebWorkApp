@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {URLS} from '../consts/urls'
 import {ActivityIndicator, ImageBackground, FlatList, StyleSheet, Text, View} from 'react-native'
-const image = {uri: '../assets/node-min.jpg'};
+        const image = {uri: '../assets/node-min.jpg'};
 import Card from './Card'
 
         const styles = StyleSheet.create({
@@ -21,15 +21,15 @@ import Card from './Card'
             backgroundColor: '#f9f9f9'
           },
           banner: {
-            flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'center',
-            marginBottom: 20,
+
           },
           image: {
-    flex: 1,
-    justifyContent: 'center',
-  },
+            flex: 1,
+            justifyContent: 'center',
+            flex: 1,
+            flexDirection: 'row',
+            marginBottom: 20,
+          },
           title: {
             fontSize: '30px',
             fontWeight: '500',
@@ -39,8 +39,6 @@ import Card from './Card'
 
           },
         });
-
-
 
 
 
@@ -68,21 +66,21 @@ export default function KnowledgeBase() {
   return (
           <View style={styles.container}>
             <View style={styles.banner}>
-            <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-              <Text style={styles.title}>Knowledge Base</Text>
+              <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+                <Text style={styles.title}>Knowledge Base</Text>
               </ImageBackground>
             </View>
-                      {isLoading ? (
-                              <ActivityIndicator />
-                              ) : (
-                      <FlatList
-                        data={data}
-                        keyExtractor={({id}) => id}
-                        renderItem={({item}) => (
-                                      <Card item={item} />
+            {isLoading ? (
+              <ActivityIndicator />
+             ) : (
+                        <FlatList
+                          data={data}
+                          keyExtractor={({id}) => id}
+                          renderItem={({item}) => (
+                                        <Card item={item} />
                                     )}
-                      />
-                      )}
+                        />
+                    )}
           </View>
           )
 } 
