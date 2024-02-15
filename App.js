@@ -2,6 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import Header from './components/Header'
 import Main from './components/Main'
+import KnowledgeBase from './components/KnowledgeBase'
+
 
 
 export default function App() {
@@ -9,7 +11,7 @@ export default function App() {
       <ScrollView>
   <Header/>
     <View>
-<Main/>    
+<KnowledgeBase/>    
 <StatusBar style="auto" />
     </View>
     </ScrollView>

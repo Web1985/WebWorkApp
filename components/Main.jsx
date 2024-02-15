@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {KNOWLEDGE_BASE} from '../consts/urls'
+import {URLS} from '../consts/urls'
 import {ActivityIndicator, FlatList, StyleSheet, Text, View} from 'react-native'
 
 import Card from './Card'
@@ -33,7 +33,7 @@ export default function Main() {
 
     const getNodes = async () => {
         try {
-            const response = await fetch('https://webwork.best/api/knowledge-base');
+            const response = await fetch(URLS.KNOWLEDGE_BASE);
             const json = await response.json();
             setData(json);
         } catch (error) {
