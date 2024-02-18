@@ -1,15 +1,20 @@
 import React, {useState, useEffect} from 'react'
 import {URLS} from '../consts/urls'
 import {ActivityIndicator, ImageBackground, FlatList, StyleSheet, Text, View} from 'react-native'
-        const image = {uri: '../assets/node-min.jpg'};
+import image from '../assets/node-min.jpg';
 import Card from './Card'
 
         const styles = StyleSheet.create({
           container: {
-            paddingTop: 40,
+            paddingTop: 0,
             paddingBottom: 40,
             paddingLeft: 15,
-            paddingRight: 15
+            paddingRight: 15,
+
+          },
+          relative: {
+            zIndex: 1,
+            position: 'relative',
           },
           block: {
             marginTop: 10,
@@ -21,14 +26,18 @@ import Card from './Card'
             backgroundColor: '#f9f9f9'
           },
           banner: {
-
+            zIndex: 1,
+            position: 'relative',
           },
           image: {
-            flex: 1,
             justifyContent: 'center',
+            width: '100%',
+            height: '100%',
             flex: 1,
+            bacgroundSize: 'cover',
             flexDirection: 'row',
             marginBottom: 20,
+
           },
           title: {
             fontSize: '30px',
@@ -36,6 +45,8 @@ import Card from './Card'
             color: 'rgb(32, 32, 32)',
             marginBottom: 50,
             marginTop: 20,
+            paddingTop: 30,
+            paddingBottom: 10
 
           },
         });
@@ -43,6 +54,7 @@ import Card from './Card'
 
 
 export default function KnowledgeBase() {
+
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
@@ -64,23 +76,25 @@ export default function KnowledgeBase() {
 
 
   return (
-          <View style={styles.container}>
+          <View  style={styles.relative}>
             <View style={styles.banner}>
               <ImageBackground source={image} resizeMode="cover" style={styles.image}>
                 <Text style={styles.title}>Knowledge Base</Text>
               </ImageBackground>
             </View>
-            {isLoading ? (
-              <ActivityIndicator />
-             ) : (
-                        <FlatList
-                          data={data}
-                          keyExtractor={({id}) => id}
-                          renderItem={({item}) => (
-                                        <Card item={item} />
-                                    )}
-                        />
-                    )}
+            <View style={styles.container}>
+              {isLoading ? (
+                              <ActivityIndicator />
+                                ) : (
+                      <FlatList
+                        data={data}
+                        keyExtractor={({id}) => id}
+                        renderItem={({item}) => (
+                                      <Card item={item} />
+                                      )}
+                      />
+                        )}
+            </View>
           </View>
           )
 } 
