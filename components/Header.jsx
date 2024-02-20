@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {TouchableOpacity, StyleSheet, Text, TextInput, View, Image} from 'react-native';
-
+import { useNavigation } from '@react-navigation/native';
 
 import Burger from './Burger'
 import MenuDropdown from './MenuDropdown'
@@ -23,7 +23,7 @@ import MenuDropdown from './MenuDropdown'
             paddingTop: 30,
             paddingLeft: 15,
             paddingRight: 25,
-            paddingBottom: 10,
+            paddingBottom: 0,
             overflow: 'visible',
             flexDirection: 'row',
             justifyContent: 'space-between',
@@ -49,31 +49,42 @@ import MenuDropdown from './MenuDropdown'
             justifyContent: 'center',
           },
           burger: {
-            padding:10,
-            width: 55
+            padding: 10,
+            width: 55,
+            marginTop:10
           }
         });
 
 
 export default function Header() {
   const [menuActive, setMenuActive] = useState(false);
+  const navigation = useNavigation();
 
+  function onPress(state) {
 
-  function onPress() {
-    if (menuActive) {
+    if (state == false) {
       setMenuActive(false);
     } else {
-      setMenuActive(true);
+      if (menuActive) {
+        setMenuActive(false);
+      } else {
+        setMenuActive(true);
+      }
     }
   }
 
   return (
           <View  style={styles.visible}>
             <View style={[styles.cont, styles.shadowProp]}>
-              <Image
-                style={styles.logo}
-                source={{uri: 'https://webwork.best/themes/custom/portfolio/img/logo_black.png'}}
-                />
+          
+              <TouchableOpacity onPress={() => {
+              navigation.navigate('Home'), onPress(false)
+            }}>
+                <Image
+                  style={styles.logo}
+                  source={{uri: 'https://webwork.best/themes/custom/portfolio/img/logo_black.png'}}
+                  />
+              </TouchableOpacity>    
               <TouchableOpacity onPress={onPress}  style={styles.burger}>
                 <Burger menuActive={menuActive}/>
               </TouchableOpacity>      

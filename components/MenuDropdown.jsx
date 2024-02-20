@@ -50,8 +50,8 @@ const styles = StyleSheet.create({
 
 
 
-export default function MenuDropdown( { menuActive }){
-const navigation = useNavigation();
+export default function MenuDropdown( { menuActive, onPress }){
+  const navigation = useNavigation();
   const [toVal, setToVal] = useState(0);
   const {width, height} = useWindowDimensions();
   const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
@@ -85,7 +85,7 @@ const navigation = useNavigation();
           <Animated.View  style={[styles.menu_wrapp, styles.shadowProp, animStyle]}>
             <View style={styles.menu}>
           
-              <TouchableOpacity style={styles.menu_item} onPress={() => navigation.navigate('Home')}>
+              <TouchableOpacity style={styles.menu_item} onPress={() => {navigation.navigate('Home'); onPress() }}>
                 <Text style={styles.menu_link}>Home</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.menu_item}>
@@ -100,7 +100,7 @@ const navigation = useNavigation();
               <TouchableOpacity style={styles.menu_item}>
                 <Text style={styles.menu_link}>What We've Done</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.menu_item} onPress={() =>navigation.navigate('KnowledgeBase') }>
+              <TouchableOpacity style={styles.menu_item} onPress={() => {navigation.navigate('KnowledgeBase'); onPress() }}>
                 <Text style={styles.menu_link}>Knowledge Base</Text>
               </TouchableOpacity>
           

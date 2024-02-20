@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import {URLS} from '../consts/urls'
-import {ActivityIndicator, ImageBackground, FlatList, StyleSheet, Text, View, Button} from 'react-native'
+import {ActivityIndicator, ScrollView, ImageBackground, FlatList, StyleSheet, Text, View} from 'react-native'
 import image from '../assets/node-min.jpg';
-import Card from './Card'
+import Card from '../components/Card'
 
         const styles = StyleSheet.create({
           container: {
@@ -10,12 +10,12 @@ import Card from './Card'
             paddingBottom: 40,
             paddingLeft: 15,
             paddingRight: 15,
-
+            position: 'relative',
           },
           relative: {
             zIndex: 1,
             position: 'relative',
-            marginTop: 100,
+            marginTop: 0,
           },
           block: {
             marginTop: 10,
@@ -33,8 +33,7 @@ import Card from './Card'
           image: {
             justifyContent: 'center',
             width: '100%',
-            height: '100%',
-            flex: 1,
+            display: 'flex',
             bacgroundSize: 'cover',
             flexDirection: 'row',
             marginBottom: 10,
@@ -44,9 +43,9 @@ import Card from './Card'
             fontSize: '30px',
             fontWeight: '500',
             color: 'rgb(32, 32, 32)',
-            marginBottom: 50,
+            marginBottom: 30,
             marginTop: 20,
-            paddingTop: 30,
+            paddingTop: 10,
             paddingBottom: 10
 
           },
@@ -54,7 +53,7 @@ import Card from './Card'
 
 
 
-export default function Home({navigation}) {
+export default function KnowledgeBase() {
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -77,19 +76,25 @@ export default function Home({navigation}) {
 
 
   return (
-          <View  style={styles.relative}>
+          <FlatList  style={styles.relative}>
             <View style={styles.banner}>
               <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-                <Text style={styles.title}>Home</Text>
+                <Text style={styles.title}>Knowledge Base</Text>
               </ImageBackground>
             </View>
-              <View style={styles.container}>
+            <View style={styles.container}>
               {isLoading ? (
                               <ActivityIndicator />
                                 ) : (
-                      <Text style={styles.title}>Comming soon!</Text>
+                      <FlatList
+                        data={data}
+                        keyExtractor={({id}) => id}
+                        renderItem={({item}) => (
+                                      <Card item={item} />
+                                      )}
+                      />
                         )}
             </View>
-          </View>
+          </FlatList>
           )
 } 
