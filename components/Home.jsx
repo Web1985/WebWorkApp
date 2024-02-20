@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {URLS} from '../consts/urls'
-import {ActivityIndicator, ImageBackground, FlatList, StyleSheet, Text, View} from 'react-native'
+import {ActivityIndicator, ImageBackground, FlatList, StyleSheet, Text, View, Button} from 'react-native'
 import image from '../assets/node-min.jpg';
 import Card from './Card'
 
@@ -54,7 +54,7 @@ import Card from './Card'
 
 
 
-export default function KnowledgeBase() {
+export default function Home({navigation}) {
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -80,20 +80,14 @@ export default function KnowledgeBase() {
           <View  style={styles.relative}>
             <View style={styles.banner}>
               <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-                <Text style={styles.title}>Knowledge Base</Text>
+                <Text style={styles.title}>Home</Text>
               </ImageBackground>
             </View>
-            <View style={styles.container}>
+              <View style={styles.container}>
               {isLoading ? (
                               <ActivityIndicator />
                                 ) : (
-                      <FlatList
-                        data={data}
-                        keyExtractor={({id}) => id}
-                        renderItem={({item}) => (
-                                      <Card item={item} />
-                                      )}
-                      />
+                      <Text style={styles.title}>Comming soon!</Text>
                         )}
             </View>
           </View>

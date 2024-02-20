@@ -1,28 +1,34 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react'
 import {TouchableOpacity, StyleSheet, Text, TextInput, View, Image} from 'react-native';
+
+
 import Burger from './Burger'
 import MenuDropdown from './MenuDropdown'
 
         const styles = StyleSheet.create({
           visible: {
-            position: 'relative',
             overflow: 'visible',
+            position: 'relative',
+            zIndex: 15,
+            display: 'flex',
+            flexDirection: 'column',
+            width: '100%'
+
           },
           cont: {
             position: 'relative',
             backgroundColor: 'white',
             display: 'flex',
-            marginTop: 20,
-            paddingTop: 15,
+            marginTop: 0,
+            paddingTop: 30,
             paddingLeft: 15,
-            paddingRight: 15,
-            paddingBottom: 15,
-            flex: 1,
+            paddingRight: 25,
+            paddingBottom: 10,
             overflow: 'visible',
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
-            zIndex: 10,
+            zIndex: 15,
           },
           shadowProp: {
             shadowColor: '#171717',
@@ -42,30 +48,39 @@ import MenuDropdown from './MenuDropdown'
             alignItems: 'center',
             justifyContent: 'center',
           },
-
+          burger: {
+            padding:10,
+            width: 55
+          }
         });
 
 
 export default function Header() {
   const [menuActive, setMenuActive] = useState(false);
+
+
   function onPress() {
-    setMenuActive(true);
+    if (menuActive) {
+      setMenuActive(false);
+    } else {
+      setMenuActive(true);
+    }
   }
 
   return (
-          <View style={[styles.cont, styles.shadowProp]}>
-            <Image
-              style={styles.logo}
-              source={{
-                  uri: 'https://webwork.best/themes/custom/portfolio/img/logo_black.png',
-                }}
-              />
-            <TouchableOpacity onPress={onPress}>
-              <Burger/>
-            </TouchableOpacity>      
-            <MenuDropdown menuActive={menuActive}/>
+          <View  style={styles.visible}>
+            <View style={[styles.cont, styles.shadowProp]}>
+              <Image
+                style={styles.logo}
+                source={{uri: 'https://webwork.best/themes/custom/portfolio/img/logo_black.png'}}
+                />
+              <TouchableOpacity onPress={onPress}  style={styles.burger}>
+                <Burger menuActive={menuActive}/>
+              </TouchableOpacity>      
+          
+            </View>
+            <MenuDropdown menuActive={menuActive}  onPress={onPress}/>
           </View>
-
           )
 
 }
