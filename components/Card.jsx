@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     fontWeight: '500'
   },
   card_title: {
-    fontSize: '20px',
+    fontSize: 20,
     fontWeight: '500',
     color: 'rgb(32, 32, 32)'
   },

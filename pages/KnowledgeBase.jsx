@@ -40,7 +40,7 @@ import Card from '../components/Card'
 
           },
           title: {
-            fontSize: '30px',
+            fontSize: 30,
             fontWeight: '500',
             color: 'rgb(32, 32, 32)',
             marginBottom: 30,
