@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
-import { StyleSheet, Text, View} from 'react-native'
+import { StyleSheet, FlatList, Text, View, TouchableOpacity} from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   container: {
@@ -53,30 +54,82 @@ const styles = StyleSheet.create({
 });
 
 export default function Card( {item}){
-
+  const navigation = useNavigation();
   const [isTags, setIsTags] = useState(false);
-
+  const [tags, setTags] = useState();
   useEffect(() => {
     if (item.field_tags !== '') {
-      setIsTags(true)
+      setIsTags(true);
+      let tags_name =item.field_tags.split(', ');
+      let tags_id =item.field_tags_1.split(', ');
+      
+      setTags(item.field_tags.split(', '));
+
     }
+
+
   }, []);
-  
+
   return (
           <View  key={item.id} style={styles.card}>
             <View style={styles.card_header}>
               <View style={styles.card_header_left}>
-                <Text style={styles.category}><FontAwesome5 name={'tag'} solid /> {item.field_category}</Text> 
+                <TouchableOpacity style={styles.menu_item} onPress={
+                  () => {
+                    navigation.navigate({
+                      name: 'Category',
+                      params: {
+                        category: item.field_category_1,
+                        category_name: item.field_category
+                      }
+                    })
+
+                  }
+                                  }>
+                  <Text style={styles.category}><FontAwesome5 name={'tag'} solid /> {item.field_category}</Text> 
+          
+                </TouchableOpacity>
               </View>
               <View>
                 <Text style={styles.card_header_right} ><FontAwesome5 name={'comments'} solid/> {item.comment_count}</Text>
               </View>
             </View>
-            <Text style={styles.card_title}>
-            {item.title}
-            </Text>
-            <View style={styles.card_footer}><Text>{item.created_1}</Text></View>
-              {isTags ? (<View style={styles.card_footer_tags}><Text>{item.field_tags}</Text></View>) : null }
+            <TouchableOpacity style={styles.menu_item} onPress={
+              () => {
+                navigation.navigate({
+                  name: 'Node',
+                  params: {nid: item.nid}
+                })
+
+              }
+                              }>
+              <Text style={styles.card_title}>{item.title}</Text>
+            </TouchableOpacity>
+            <View style={styles.card_footer}>
+              <Text>{item.created_1}</Text>
             </View>
+            {isTags ? (<View style={styles.card_footer_tags}>
+              <FlatList
+                data={tags}
+                keyExtractor={({id}) => id}
+                renderItem={({item}) => (
+                            <Text>{item}</Text>
+                                  )}
+                />
+                <TouchableOpacity style={styles.menu_item} onPress={
+                        () => {
+                          navigation.navigate({
+                            name: 'Tag',
+                            params: {
+                              term: item.field_tags_1,
+                              term_name: item.field_tags
+                            }
+                          })
+
+                        }
+                                  }>
+                </TouchableOpacity>
+            </View>) : null }
+          </View>
           )
 }

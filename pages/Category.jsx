@@ -53,14 +53,16 @@ import Card from '../components/Card'
 
 
 
-export default function KnowledgeBase() {
+export default function Category({ route }) {
 
+  const { category } = route.params;
+  const { category_name } = route.params;
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
   const getNodes = async () => {
     try {
-      const response = await fetch(URLS.KNOWLEDGE_BASE);
+      const response = await fetch(URLS.CATEGORY+'/'+category);
       const json = await response.json();
       setData(json);
     } catch (error) {
@@ -79,7 +81,7 @@ export default function KnowledgeBase() {
           <ScrollView  style={styles.relative}>
             <View style={styles.banner}>
               <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-                <Text style={styles.title}>Knowledge Base</Text>
+                <Text style={styles.title}>{category_name}</Text>
               </ImageBackground>
             </View>
             <View style={styles.container}>

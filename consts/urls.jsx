@@ -16,6 +16,8 @@ export const URLS = {
   KNOWLEDGE_BASE: SERVER_URL+API_URL + 'knowledge-base',
   KNOWLEDGE_NODES: SERVER_URL+API_URL + 'knowledge-base/nodes',
   CATEGORIES: SERVER_URL+API_URL + 'categories',
+  CATEGORY: SERVER_URL+API_URL + 'category',
+  TERM: SERVER_URL+API_URL + 'term',
   CARD_ITEM: SERVER_URL+API_URL + 'card',
   SESSION: SERVER_URL+'/session/token',
   WEBFORM: SERVER_URL+'/webform_rest/submit?_format=json',

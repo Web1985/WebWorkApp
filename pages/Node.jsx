@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react'
+import {ActivityIndicator, FlatList, StyleSheet, Text, View} from 'react-native'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import RenderHtml from 'react-native-render-html';
+import { useWindowDimensions } from 'react-native';
 import {URLS} from '../consts/urls'
-import {ActivityIndicator, ScrollView, ImageBackground, FlatList, StyleSheet, Text, View} from 'react-native'
-import image from '../assets/node-min.jpg';
-import Card from '../components/Card'
+import { NodeItem } from  '../components/NodeItem'
 
         const styles = StyleSheet.create({
           container: {
@@ -49,20 +51,23 @@ import Card from '../components/Card'
             paddingBottom: 10
 
           },
+          body: {
+
+          }
         });
 
 
-
-export default function KnowledgeBase() {
-
+export default function Node( { route }){
+  const {nid} = route.params;
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-
-  const getNodes = async () => {
+  const [body, setBody] = useState(null);
+  const getNode = async () => {
     try {
-      const response = await fetch(URLS.KNOWLEDGE_BASE);
+      const response = await fetch(URLS.KNOWLEDGE_BASE + '/' + nid);
       const json = await response.json();
       setData(json);
+
     } catch (error) {
       console.error(error);
     } finally {
@@ -71,30 +76,27 @@ export default function KnowledgeBase() {
   };
 
   useEffect(() => {
-    getNodes();
+    getNode();
   }, []);
+const { width } = useWindowDimensions();
 
-
-  return (
-          <ScrollView  style={styles.relative}>
-            <View style={styles.banner}>
-              <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-                <Text style={styles.title}>Knowledge Base</Text>
-              </ImageBackground>
-            </View>
-            <View style={styles.container}>
-              {isLoading ? (
+  return(
+          <View style={styles.container}>
+            {isLoading ? (
                               <ActivityIndicator />
-                                ) : (
-                      <FlatList
-                        data={data}
-                        keyExtractor={({id}) => id}
-                        renderItem={({item}) => (
-                                      <Card item={item} />
-                                      )}
-                      />
-                        )}
-            </View>
-          </ScrollView>
-          )
-} 
+                              ) : (
+                      <View style={styles.container}>   
+                        <Text style={styles.title}>{data[0].title}</Text>
+                        <RenderHtml
+                             source={{
+                                html: data[0].body
+                              }}
+                              contentWidth={width}
+                         />
+                      </View>
+                      )}
+          
+          </View>
+          );
+
+}
