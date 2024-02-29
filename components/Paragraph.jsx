@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import { StyleSheet, FlatList, Text, View, TouchableOpacity} from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Banner from '../components/Banner';
+import Blocks from '../components/Blocks';
+
 
 export default function Paragraph({data}){
         if(data.type=='Banner'){
@@ -10,7 +12,7 @@ export default function Paragraph({data}){
                 )
         }else if(data.type=='Blocks'){
             return (
-            <View><Text>{data.type}</Text></View>
+            <Blocks data={data}/>
     )
         }
         return null;
