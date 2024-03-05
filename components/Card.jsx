@@ -56,14 +56,25 @@ const styles = StyleSheet.create({
 export default function Card( {item}){
   const navigation = useNavigation();
   const [isTags, setIsTags] = useState(false);
-  const [tags, setTags] = useState();
+ // const [tags, setTags] = useState();
+ const tags = [
+  {'id': '49', 'name': 'Font Awasome'},
+  {'id': '50', 'name': 'Font Awa'}
+];
+let tags_arr = [{'id':'ddd', 'name': 'item'}];
   useEffect(() => {
     if (item.field_tags !== '') {
       setIsTags(true);
       let tags_name =item.field_tags.split(', ');
       let tags_id =item.field_tags_1.split(', ');
       
-      setTags(item.field_tags.split(', '));
+      tags_name.forEach(myFunction);
+
+function myFunction(item, index, tags_arr) {
+  tags_arr.push({'id':'ddd', 'name': 'item'});
+} 
+
+     // setTags(item.field_tags.split(', '));
 
     }
 
@@ -110,10 +121,10 @@ export default function Card( {item}){
             </View>
             {isTags ? (<View style={styles.card_footer_tags}>
               <FlatList
-                data={tags}
+                data={tags_arr}
                 keyExtractor={({id}) => id}
                 renderItem={({item}) => (
-                            <Text>{item}</Text>
+                            <Text>{item.name} {item.id};</Text>
                                   )}
                 />
                 <TouchableOpacity style={styles.menu_item} onPress={
