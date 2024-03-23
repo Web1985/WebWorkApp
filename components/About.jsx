@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
-import { StyleSheet, FlatList, Text, View, ImageBackground, TouchableOpacity, useWindowDimensions} from 'react-native'
+import { StyleSheet, FlatList, Text, View, ImageBackground, TouchableOpacity, useWindowDimensions, Image} from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import RenderHtml from 'react-native-render-html';
-import Block from '../components/Block';
+
 
 import {SERVER_URL} from '../consts/urls'
         const styles = StyleSheet.create({
@@ -11,8 +11,9 @@ import {SERVER_URL} from '../consts/urls'
             zIndex: 1,
             position: 'relative',
             marginTop: 0,
+            paddingLeft: 15,
+            paddingRight: 15
           },
-
           banner: {
             zIndex: 1,
             position: 'relative',
@@ -33,15 +34,6 @@ import {SERVER_URL} from '../consts/urls'
             display: 'flex',
             flexDirection: 'row',
           },
-          image: {
-            justifyContent: 'center',
-            width: '100%',
-            display: 'flex',
-            bacgroundSize: 'cover',
-            flexDirection: 'row',
-            marginBottom: 10,
-
-          },
           title: {
             fontSize: '30px',
             fontWeight: '500',
@@ -50,8 +42,8 @@ import {SERVER_URL} from '../consts/urls'
             marginTop: 20,
             paddingTop: 10,
             paddingBottom: 0,
-            textTransform: 'uppercase'
-
+            textTransform: 'uppercase',
+            textAlign: 'center',
           },
           title_wrap: {
             marginBottom: 20,
@@ -79,16 +71,69 @@ import {SERVER_URL} from '../consts/urls'
             width: 200,
             height: 2,
             backgroundColor: '#000',
+          },
+          subtitle_wrap: {
+            textAlign: 'start',
+            justifyContent: 'start',
+            display: 'flex',
+            flexDirection: 'row',
+            alignSelf: 'start',
+          },
+          subtitle: {
+            fontSize: 20,
+            fontWeight: '500',
+            color: 'rgb(32, 32, 32)',
+            marginBottom: 10,
+            marginTop: 20,
+            paddingTop: 10,
+            paddingBottom: 0,
+            textTransform: 'uppercase'
+
+          },
+          tags: {
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+          },
+          tag: {
+            paddingTop: 5,
+            paddingBottom: 5,
+            paddingLeft: 10,
+            paddingRight: 10,
+            marginRight: 5,
+            marginBottom: 5,
+            backgroundColor: '#15bfaf',
+            display: 'flex',
+            borderBottomLeftRadius: 3,
+            borderBottomRightRadius: 3,
+            borderTopLeftRadius: 3,
+            borderTopRightRadius: 3,
+          },
+          tag_inner: {
+            color: '#fff',
+          },
+          avatar: {
+            height: 60,
+            marginTop: 10,
+            marginRight: 10,
+            width: 60,
+            borderBottomLeftRadius: 30,
+            borderBottomRightRadius: 30,
+            borderTopLeftRadius: 30,
+            borderTopRightRadius: 30,
           }
+
         });
 
 
-export default function Blocks( {data}){
+export default function About( {data}){
   const {width} = useWindowDimensions();
 
   const {height} = useWindowDimensions();
 
   const bg = data.view_1;
+
+  let tags_names = data.field_expert_in.split(', ');
   return (
           <View style={[styles.relative]}>
             <ImageBackground source={{uri: SERVER_URL + data.field_image}} resizeMode="cover" style={styles.banner}>
@@ -102,8 +147,33 @@ export default function Blocks( {data}){
                   </View>
                 </View>
               </View>
+              <View style={styles.subtitle_wrap}> 
+                <Image 
+                  style={styles.avatar}
+                  source={{uri: SERVER_URL + data.field_image_1}}
+                  />
+                <Text style={styles.subtitle}>{data.field_title_1}</Text>
+              </View>
               <View style={styles.text}> 
-                <Block data={data.view}/>
+                <RenderHtml
+                  source={{html: data.field_body_1}}
+                  contentWidth={width}
+                  style={styles.text}
+                  />
+              </View>
+              <View style={styles.subtitle_wrap}> 
+                <Text style={styles.subtitle}>Expert in:</Text>
+              </View>
+              <View> 
+          
+                <FlatList
+                  style={styles.tags}
+                  data={tags_names}
+                  keyExtractor={({id}) => id}
+                  renderItem={({item}) => (
+                        <TouchableOpacity style={styles.tag}><Text style={styles.tag_inner}>{item}</Text></TouchableOpacity>
+                              )}
+                  />
               </View>
             </ImageBackground>
           </View>
