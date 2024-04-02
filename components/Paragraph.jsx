@@ -4,6 +4,8 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Banner from '../components/Banner';
 import Blocks from '../components/Blocks';
 import About from '../components/About';
+import Webform from '../components/Webform';
+
 
 export default function Paragraph( {data}){
   if (data.type == 'Banner') {
@@ -21,6 +23,10 @@ export default function Paragraph( {data}){
   } else if (data.type == 'Our Works') {
     return (
             <Blocks data={data} />
+            )
+   } else if (data.type == 'Webform') {
+    return (
+            <Webform data={data} />
             )
   }
   return null;
