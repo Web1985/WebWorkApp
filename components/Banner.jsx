@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { StyleSheet, FlatList, Text, View, ImageBackground, TouchableOpacity, useWindowDimensions} from 'react-native'
+import { StyleSheet, Text, View, ImageBackground, TouchableOpacity, useWindowDimensions} from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import RenderHtml from 'react-native-render-html';
 

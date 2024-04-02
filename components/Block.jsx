@@ -61,11 +61,11 @@ export default function Block( {data}){
                 data={blocks}
                 keyExtractor={({id}) => id}
                 renderItem={({item}) => (
-                        <View key={item.parent_id} style={styles.block}>
+                        <View key={item.id_1+100000} style={styles.block}>
                         <View  style={styles.icon}>
                           <SvgUri width="60"   height="60"  uri={SERVER_URL + item.field_icon}/> 
                         </View>
-                        <Text style={styles.title}>{item.field_title}</Text>
+                        <Text style={styles.title}>{item.field_title} </Text>
                         <RenderHtml
                           source={{html: item.field_body}}
                           contentWidth={width}

@@ -171,7 +171,7 @@ export default function About( {data}){
                   data={tags_names}
                   keyExtractor={({id}) => id}
                   renderItem={({item}) => (
-                        <TouchableOpacity style={styles.tag}><Text style={styles.tag_inner}>{item}</Text></TouchableOpacity>
+                        <TouchableOpacity key={item.id+1000}  style={styles.tag}><Text style={styles.tag_inner}>{item}</Text></TouchableOpacity>
                               )}
                   />
               </View>

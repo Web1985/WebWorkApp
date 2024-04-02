@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import { StyleSheet, FlatList, Text, View, ImageBackground, TouchableOpacity, useWindowDimensions} from 'react-native'
+import { StyleSheet, Text, View, ImageBackground, TouchableOpacity, useWindowDimensions} from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import RenderHtml from 'react-native-render-html';
 import Block from '../components/Block';
+import Portfolio from '../components/Portfolio';
 
 import {SERVER_URL} from '../consts/urls'
         const styles = StyleSheet.create({
@@ -12,7 +13,6 @@ import {SERVER_URL} from '../consts/urls'
             position: 'relative',
             marginTop: 0,
           },
-
           banner: {
             zIndex: 1,
             position: 'relative',
@@ -85,10 +85,9 @@ import {SERVER_URL} from '../consts/urls'
 
 export default function Blocks( {data}){
   const {width} = useWindowDimensions();
-
   const {height} = useWindowDimensions();
-
   const bg = data.view_1;
+  
   return (
           <View style={[styles.relative]}>
             <ImageBackground source={{uri: SERVER_URL + data.field_image}} resizeMode="cover" style={styles.banner}>
@@ -103,7 +102,7 @@ export default function Blocks( {data}){
                 </View>
               </View>
               <View style={styles.text}> 
-                <Block data={data.view}/>
+                {data.type=="Our Works" ? <Portfolio data={data.view_1}/> : <Block data={data.view}/> }
               </View>
             </ImageBackground>
           </View>

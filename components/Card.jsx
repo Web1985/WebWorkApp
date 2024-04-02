@@ -84,7 +84,7 @@ function myFunction(item, index, tags_arr) {
   return (
           <View  key={item.id} style={styles.card}>
             <View style={styles.card_header}>
-              <View style={styles.card_header_left}>
+              <View style={styles.card_header_left}><Text>{item.id} wwwww</Text>
                 <TouchableOpacity style={styles.menu_item} onPress={
                   () => {
                     navigation.navigate({
@@ -124,7 +124,7 @@ function myFunction(item, index, tags_arr) {
                 data={tags_arr}
                 keyExtractor={({id}) => id}
                 renderItem={({item}) => (
-                            <Text>{item.name} {item.id};</Text>
+                            <Text key={item.name}>{item.name}</Text>
                                   )}
                 />
                 <TouchableOpacity style={styles.menu_item} onPress={

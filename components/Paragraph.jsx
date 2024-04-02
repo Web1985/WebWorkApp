@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { StyleSheet, FlatList, Text, View, TouchableOpacity} from 'react-native'
+import { StyleSheet,  Text, View, TouchableOpacity} from 'react-native'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Banner from '../components/Banner';
 import Blocks from '../components/Blocks';
@@ -17,6 +17,10 @@ export default function Paragraph( {data}){
   } else if (data.type == 'About') {
     return (
             <About data={data} />
+            )
+  } else if (data.type == 'Our Works') {
+    return (
+            <Blocks data={data} />
             )
   }
   return null;
