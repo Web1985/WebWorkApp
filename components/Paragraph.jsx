@@ -24,7 +24,7 @@ export default function Paragraph( {data}){
     return (
             <Blocks data={data} />
             )
-   } else if (data.type == 'Webform') {
+   } else if (data.type == 'Webform2') {
     return (
             <Webform data={data} />
             )

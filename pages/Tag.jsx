@@ -3,6 +3,7 @@ import {URLS} from '../consts/urls'
 import {ActivityIndicator, ScrollView, ImageBackground, FlatList, StyleSheet, Text, View} from 'react-native'
 import image from '../assets/node-min.jpg';
 import Card from '../components/Card'
+import FooterLocal from '../components/FooterLocal'
 
         const styles = StyleSheet.create({
           container: {
@@ -98,6 +99,8 @@ export default function Teg({ route }) {
                       />
                         )}
             </View>
+                                <FooterLocal/>
+
           </ScrollView>
           )
 } 

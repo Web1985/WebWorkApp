@@ -84,7 +84,7 @@ function myFunction(item, index, tags_arr) {
   return (
           <View  key={item.id} style={styles.card}>
             <View style={styles.card_header}>
-              <View style={styles.card_header_left}><Text>{item.id} wwwww</Text>
+              <View style={styles.card_header_left}>
                 <TouchableOpacity style={styles.menu_item} onPress={
                   () => {
                     navigation.navigate({

@@ -5,6 +5,7 @@ import RenderHtml from 'react-native-render-html';
 import { useWindowDimensions } from 'react-native';
 import {URLS} from '../consts/urls'
 import { NodeItem } from  '../components/NodeItem'
+import FooterLocal from '../components/FooterLocal'
 
         const styles = StyleSheet.create({
           container: {
@@ -95,7 +96,8 @@ const { width } = useWindowDimensions();
                          />
                       </View>
                       )}
-          
+                      <FooterLocal/>
+
           </View>
           );
 

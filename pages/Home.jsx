@@ -3,6 +3,8 @@ import {URLS} from '../consts/urls'
 import {ActivityIndicator, ScrollView, ImageBackground, FlatList, StyleSheet, Text, View, Button} from 'react-native'
 import image from '../assets/node-min.jpg';
 import Paragraph from '../components/Paragraph'
+import FooterLocal from '../components/FooterLocal'
+
 
         const styles = StyleSheet.create({
 
@@ -10,6 +12,7 @@ import Paragraph from '../components/Paragraph'
                 zIndex: 1,
                 position: 'relative',
                 marginTop: 0,
+                
             },
 
         });
@@ -55,6 +58,7 @@ export default function Home( {navigation}) {
                             />
 
                         )}
+                <FooterLocal/>
             </ScrollView>
             )
 }
