@@ -38,13 +38,31 @@ import { useNavigation } from '@react-navigation/native';
             backgroundColor: '#fff',
             alignItems: 'center',
             justifyContent: 'center',
+          },
+          footerColor:{
+              color: '#fff'
           }
         });
  
 export default function Footer(){
-        
+          const [menuActive, setMenuActive] = useState(false);
+  const navigation = useNavigation();
+
+  function onPress(state) {
+
+    if (state == false) {
+      setMenuActive(false);
+    } else {
+      if (menuActive) {
+        setMenuActive(false);
+      } else {
+        setMenuActive(true);
+      }
+    }
+  }
         return (
             <View style={styles.footer}>
+                <Text style={styles.footerColor}>Footer</Text>
 
         <TouchableOpacity onPress={() => {
               navigation.navigate('Home'), onPress(false)

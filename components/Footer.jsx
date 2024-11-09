@@ -47,13 +47,26 @@ const styles = StyleSheet.create({
 });
 
 export default function Footer() {
+          const [menuActive, setMenuActive] = useState(false);
+  const navigation = useNavigation();
 
+  function onPress(state) {
+
+    if (state == false) {
+      setMenuActive(false);
+    } else {
+      if (menuActive) {
+        setMenuActive(false);
+      } else {
+        setMenuActive(true);
+      }
+    }
     return (
             <View style={styles.footer}>
                 <TouchableOpacity onPress={() => {
                         navigation.navigate('Home'), onPress(false)
                                       }}>
-                    <Text style={styles.homeLink}>home</Text>
+                    <Text style={styles.homeLink}>home s</Text>
                 </TouchableOpacity> 
                 <TouchableOpacity onPress={() => {
                         navigation.navigate('Home'), onPress(false)
@@ -62,6 +75,7 @@ export default function Footer() {
                 </TouchableOpacity> 
             </View>
 
-            )
+            );
+}
 }
     

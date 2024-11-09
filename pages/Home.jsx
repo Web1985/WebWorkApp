@@ -12,7 +12,6 @@ import FooterLocal from '../components/FooterLocal'
                 zIndex: 1,
                 position: 'relative',
                 marginTop: 0,
-                
             },
 
         });
@@ -49,6 +48,7 @@ export default function Home( {navigation}) {
                                 <FlatList
                                     data={data}
                                     keyExtractor={({id}) => id}
+                                    ListFooterComponent={<FooterLocal />}
                                     renderItem={({item}) => (
                                                         <ScrollView>
                                                         <Paragraph data={item}/>
@@ -58,7 +58,6 @@ export default function Home( {navigation}) {
                             />
 
                         )}
-                <FooterLocal/>
             </ScrollView>
             )
 }
